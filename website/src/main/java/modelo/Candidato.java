@@ -7,12 +7,22 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Classe Candidato
+ * 
+ * Container utilizado para acessar a base de dados via Hibernate. Relacionado à tabela Candidato.
+ * 
+ * @author Fabio Moreira
+ * @version 1.0
+ */
 @Entity
 @Table(name = "candidato")
 public class Candidato implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	public static int nCandidato = 0;
+	
+	/** Quantidade de candidatos cadastrados no sistema. */
+	public static int nCandidato = 0; 
 
 	@Id
 	@Column(name = "id", unique = true)

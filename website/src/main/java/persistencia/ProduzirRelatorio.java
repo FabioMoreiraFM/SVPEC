@@ -10,9 +10,22 @@ import javax.persistence.Query;
 
 import modelo.Relatorio;
 
+/**
+ * Prepara os relatórios finais e parciais das eleições. 
+ * 
+ * @author Fabio Moreira
+ * @version 1.0
+ */
 public class ProduzirRelatorio {
 	private static EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("Eleicoes");
 	
+	/**
+	 * Produz o relatório final de uma eleição.
+	 * 
+	 * @param idEleicao Id da eleição encerrada.
+	 * 
+	 * @return Se a consulta a base de dados for bem sucedida, o relatório final, ou null caso contrário.
+	 */
 	@SuppressWarnings("unchecked")
 	public static Relatorio carregarRelatorioFinal(String idEleicao) {
 		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
@@ -42,7 +55,14 @@ public class ProduzirRelatorio {
 		
 		return null;
 	}
-
+	
+	/**
+	 * Produz o relatório parcial de uma eleição.
+	 * 
+	 * @param idEleicao Id da eleição finalizada. 
+	 * 
+	 * @return Se a consulta for bem sucedida, o número de votantes, null caso contrário. 
+	 */
 	public static int carregarRelatorioParcial(String idEleicao) {
 		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
 		

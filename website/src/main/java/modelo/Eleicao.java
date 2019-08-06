@@ -7,11 +7,21 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Classe Eleicao
+ * 
+ * Container utilizado para acessar a base de dados via Hibernate. Relacionado à tabela Eleicao.
+ * 
+ * @author Fabio Moreira
+ * @version 1.0
+ */
 @Entity
 @Table(name = "eleicao")
 public class Eleicao implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+	
+	/** Quantidade de eleições cadastradas no sistema. */
 	public static int nEleicao = 0;
 	
 	@Id

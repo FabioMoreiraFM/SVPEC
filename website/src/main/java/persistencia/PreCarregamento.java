@@ -20,9 +20,19 @@ import modelo.Eleitor;
 import modelo.Voto;
 import utils.Pair;
 
+/**
+ * Contém métodos que inicializam o estado do sistema.
+ * 
+ * @author Fabio Moreira
+ * @version 1.0
+ */
 public class PreCarregamento {
 	private static EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("Eleicoes");
 	
+	/**
+	 * Inicializa as variáveis relacionadas à contagem de objetos. 
+	 * 
+	 */
 	public static void inicializacao() {
 		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
 		
@@ -54,6 +64,15 @@ public class PreCarregamento {
 		
 	}
 	
+	/**
+	 * Filtra as eleições de acordo com a data atual.
+	 * 
+	 * Eleições com data de fim anteriores à data atual estão finalizadas.
+	 * Eleições com data de fim posterior à data atual estão em andamento. 
+	 * Eleições com data de início posterior à data atual não são contabilizadas, pois essas eleições ainda não iniciaram.
+	 * 
+	 * @return Par de listas. A primeira contém as eleições em andamento, a segunda contém as eleições encerradas.
+	 */
 	public static Pair<List<Eleicao>, List<Eleicao>> separaEleicoesPorStatus() {
 		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
 		

@@ -6,10 +6,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+/**
+ * Classe Relatorio
+ * 
+ * Produz um relatório completo sobre a eleição escolhida, incluindo
+ * quantidade total de votos e quantidade de votos que cada candidato recebeu.
+ * 
+ * @author Fabio Moreira
+ * @version 1.0
+ */
 public class Relatorio {
 	
+	/** Contém as informações que serão exibidas sobre uma eleição. Padrão: <Cargo, <QtdVotos, Candidato>>*/
 	public Map<String, Map<Integer, String>> relatorio;
 	
+	/**
+	 * Construtor da classe Relatório.
+	 * 
+	 * @param pontuaram Lista de candidatos que obteram ao menos um voto.
+	 * @param zeraram Lista de candidatos que não obteram votos.
+	 */
 	public Relatorio(List<Object[]> pontuaram, List<Object[]> zeraram) {
 		relatorio = new HashMap<String, Map<Integer, String>>();
 		
@@ -30,6 +46,10 @@ public class Relatorio {
 		}
 	}
 	
+	/**
+	 * Formata o relatório para ser exibido no navegador.
+	 * Cada linha contém: Nome do cargo, nome do candidato e quantidade de votos obtidos.
+	 */
 	@Override
 	public String toString() {
 		String linhas = "";

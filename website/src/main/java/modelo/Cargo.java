@@ -7,10 +7,20 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Classe Cargo
+ * 
+ * Container utilizado para acessar a base de dados via Hibernate. Relacionado à tabela Cargo.
+ * 
+ * @author Fabio Moreira
+ * @version 1.0
+ */
 @Entity
 @Table(name = "cargo")
 public class Cargo implements Serializable{
 	private static final long serialVersionUID = 1L;
+	
+	/** Quantidade de cargos cadastrados no sistema. */
 	public static int nCargo = 0;
 	
 	@Id

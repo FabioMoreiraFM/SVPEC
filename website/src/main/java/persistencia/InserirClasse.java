@@ -13,9 +13,24 @@ import modelo.Eleicao;
 import modelo.Eleitor;
 import modelo.Voto;
 
+/**
+ * Classe InserirClasse
+ * 
+ * Contém os métodos que inserem informações na base de dados.  
+ * 
+ * @author Fabio Moreira
+ * @version 1.0
+ */
 public class InserirClasse {
 	private static EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("Eleicoes");
 	
+	/**
+	 * Insere os votos de um eleitor na base de dados. 
+	 * 
+	 * @param cargos Lista de cargos relacionados à eleição em andamento.
+	 * @param idCandidatos Lista com os ids de candidatos que receberam votos.
+	 * @param eleicaoEscolhida Id da eleição em andamento.
+	 */
 	public static void insereNovoVoto(List<Cargo> cargos, String[] idCandidatos, int eleicaoEscolhida) {
 		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
 		EntityTransaction et = null;
@@ -39,7 +54,15 @@ public class InserirClasse {
 			em.close();
 		}	
 	}
-
+	
+	/**
+	 * Insere um novo eleitor na base de dados.
+	 * 
+	 * @param nome Nome do eleitor.
+	 * @param cpf CPF do eleitor.
+	 * @param protocolo Protocolo alfanumérico de 16 dígitos gerado após o eleitor finalizar a votação.
+	 * @param idEleicaoEscolhida Id da eleição em andamento.
+	 */
 	public static void insereEleitor(String nome, String cpf, String protocolo, int idEleicaoEscolhida) {
 		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
 		EntityTransaction et = null;
@@ -62,6 +85,13 @@ public class InserirClasse {
 		}
 	}
 	
+	/**
+	 * Insere um novo candidato na base de dados.
+	 * 
+	 * @param nome Nome do candidato.
+	 * @param nomeFoto Nome do arquivo que contém a foto do candidato.  
+	 * @param idCargo Id do cargo a ser disputado.
+	 */
 	public static void insereNovoCandidato(String nome, String nomeFoto, int idCargo) {
 		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
 		EntityTransaction et = null;
@@ -84,6 +114,11 @@ public class InserirClasse {
 		}
 	}
 	
+	/**
+	 * Insere um novo cargo na base de dados.
+	 * 	
+	 * @param nome Nome do cargo.
+	 */
 	public static void insereNovoCargo(String nome) {
 		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
 		EntityTransaction et = null;
@@ -106,6 +141,13 @@ public class InserirClasse {
 		}
 	}
 	
+	/**
+	 * Insere uma nova eleição na base de dados.
+	 * 
+	 * @param nome Nome da eleição.
+	 * @param dataInicio Data de início da eleição.
+	 * @param dataFim Data de fim da eleição.
+	 */
 	public static void insereNovaEleicao(String nome, String dataInicio, String dataFim) {
 		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
 		EntityTransaction et = null;

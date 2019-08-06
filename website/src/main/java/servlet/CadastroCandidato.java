@@ -28,7 +28,10 @@ import utils.Validador.Regex;
 public class CadastroCandidato extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
+	/** Nome do arquivo contendo a imagem do candidato. */
 	private String nomeFoto = "";
+	
+	/** Nome do candidato. */
 	private String nome = "";
 	
 	private Properties prop = new Properties();

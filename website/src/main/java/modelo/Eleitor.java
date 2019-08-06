@@ -7,11 +7,21 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Classe Eleitor
+ * 
+ * Container utilizado para acessar a base de dados via Hibernate. Relacionado à tabela Eleitor.
+ * 
+ * @author Fabio Moreira
+ * @version 1.0
+ */
 @Entity
 @Table(name = "eleitor")
 public class Eleitor implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	
+	/** Quantidade de eleitores cadastrados no sistema. */
 	public static int nEleitor = 0;
 
 	@Id

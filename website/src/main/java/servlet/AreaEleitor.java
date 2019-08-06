@@ -21,7 +21,9 @@ import utils.Validador.Regex;
 @WebServlet("/areaEleitor")
 public class AreaEleitor extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private int eleicaoEscolhida = 0;
+	
+	/** Eleição escolhida pelo usuário. */
+	private int eleicaoEscolhida = 0;  
     
 	private Properties prop = new Properties();
 	private InputStream input = getClass().getClassLoader().getResourceAsStream("/mensagem.properties");
