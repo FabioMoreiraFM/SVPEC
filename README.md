@@ -1,8 +1,8 @@
 # SVEPC - Sistema de Votação de Entidades de Previdência Complementar
 
----
-
 ## Configuração do ambiente
+
+A configuração do ambiente descrita abaixo foi executada e testada no Windows 10.
 
 #### Pré-requisito
 
@@ -20,12 +20,38 @@ No terminal, executar:
 
     mysql -u <username> -p < scripts.sql
 
+### Configurando no Eclipse
+
+#### Passos inicias
+
+1. Importe o projeto via Git. (File > Import... > Projects from Git)
+2. Espere o Eclipse carregar o projeto.
+3. Atualize o projeto via Maven. (Botão direito no projeto > Maven > Update Project..)
+4. Adicione um novo servidor TomCat.
+  1. Na aba "Servers", próxima a aba do console. Clique em "No servers are ...."
+  2. Adicione o Tomcat v9.0 Server (Perceba que o eclipse criou um diretório Servers)
+
 #### Configurando o servidor TomCat
 
-No arquivo Servers/server.xml do servidor TomCat criado, adicionar o comando abaixo, logo após o \<Context\> existente nesse arquivo.
+No servidor TomCat recém criado (Aba Servers):
+
+1. Botão direito > Add and Remove... > Adicione o projeto ao servidor (Mude o projeto da opção "Available" para "Configured")
+
+No arquivo Servers/Tomcat v9.0.../server.xml do servidor TomCat criado, adicionar o comando abaixo, logo após o \<Context\> existente nesse arquivo. (Cuidado para não adicionar depois da tag \</Host>)
 
     <Context docBase="website" path="/website" reloadable="true" source="org.eclipse.jst.jee.server:website"/> // Já existe no arquivo server.xml
     <Context docBase="caminho/para/imagens" path="/teste" /> // Adicionar esse comando
+
+O caminho em docBase deve ser substituido pelo caminho que leva até a pasta imagens, que deve estar, **necessariamente**, no mesmo diretório do projeto. (Se você importou corretamente pelo GIT é só adicionar o caminho daquela pasta que se encontra no repositório SVEPC)
+
+Antes de executar o código, talvez seja necessário modificar o diretório de trabalho, para isso faça:
+
+   1. Na aba Servers, botão direito em Tomcat V9.0 > Start e depois Tomcat V9.0 > Stop. Esse passo é necessário para que esse servidor apareça nos próximos passos.
+   2. Menu Run > Run Configurations...
+   3. Selecione o servidor TomCat v9.0, vá para a aba Arguments.
+   4. Selecione a opção "Other" em "Working directory" e defina como diretório
+   de trabalho o diretório website.
+   5. Clique no botão Apply e feche.
 
 #### Acessando o SVEPC
 
@@ -44,7 +70,28 @@ questionar.
   R: O escopo estava claro, coerente e seu tamanho estava compatível com o tempo dado
   para realizar o desafio.
 
-2. Texto
+2. Faça a estimativa em horas para cada atividade, considerando a tecnologia que você
+pretende utilizar para desenvolver.
+
+  1. Criação das telas: **5 horas** ou **30 min/tela** (em média). Seguem o mesmo padrão, com labels, forms e variáveis. Algumas telas demandam mais tempo, pois utilizam alguns comandos da JSTL. Considero que serão criadas o dobro de páginas em relação aos itens enumerados no escopo do desafio. Isso por que, além das 5 telas que serão criadas a partir dos cincos itens descritos, são necessários uma tela de boas-vindas, de exibição do relatório, de finalização do voto, entre outras.
+
+  2. Implementação da base de dados: **3 horas**. Envolve a criação do esquema da base (modelo conceitual), criação do script para execução automática dos comandos e testes.
+
+  3. Validadores: **1 hora**. Simples de se implementar, envolve o uso de regex e as bibliotecas do Java que realizam a validação. A estimativa também considera a integração dos validadores ao sistema.
+
+  4. Processamento das imagens: **2 horas**. Existem muitas questões a se considerar. Onde a imagem deve ser armazenada, como salvar/recuperar essa imagem, como configurar o projeto para suportar essa operação (talvez a etapa mais demorada, pois envolve pesquisa e testes), como carregar a imagem assim que o usuário entrar com o arquivo.
+
+  5. Gerador de protocolo: **2 horas**. A primeira ideia é procurar alguma biblioteca que gera esse protocolo de forma eficiente e segura, caso não existir, deve-se implementar uma versão simples.
+
+  6. Comunicação com a base de dados: **3 horas**. Configurar a comunicação entre aplicações costuma ser trabalhoso, deve-se aprender como fazer, qual versão é compatível com a sua aplicação/IDE, podem existir bugs e outros problemas cuja solução só é encontrada em fóruns.
+
+  7. Implementação dos Servlets: **20 horas** ou **2 horas/servlet** (em média). Parte mais complexa do trabalho. O foco principal dessas implementações está no método doPost, onde as requisições são processadas. Basicamente, aqui serão realizadas as validações, acessos a base de dados, entre outras atividades de integração. Além disso, deve-se considerar como os servlets vão se comunicar e passar informações entre si. Considerando que para cada página JSP haverá um servlet, serão criados em torno de 10 servlets.   
+
+  8. Implementação das classes de persistência: **1 hora**. A implementação é simples, envolve apenas a declaração de variáveis e alguns getters e setters.  
+
+  9. Implementação de métodos que recuperam/armazenam informações da base de dados: **2 horas**. A maioria dos métodos deve envolver o armazenamento e recuperação de classes, o que é rápido e simples de implementar. Talvez existam alguns métodos mais complexos relacionados à geração do relatório.
+
+  10. Testes: **2 horas**. Realização de testes para a homologação do sistema.
 
 3. Defina quais tecnologias você pretende usar para o desenvolvimento. Isso envolve todas
 mesmo. Seja bem detalhista.
@@ -76,6 +123,8 @@ mesmo. Seja bem detalhista.
   12. Expressões Regulares
 
 4. Estime um prazo de entrega para o trabalho completo em dias úteis.
+
+ R: Considerando 8 horas de trabalho por dia e as estimativas das atividades, exibidas na questão 2, o trabalho pode ser realizado em 6 dias, adicionando 1 dia de trabalho a mais para eventuais atrasos (resolução de bugs ou atividades subestimadas).
 
 5. Seguem alguns pontos importantes para a entrega de sua solução final:
 
